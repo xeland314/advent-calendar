@@ -78,7 +78,7 @@ const CountdownTimerForGift: React.FC<CountdownBoxProps> = ({ day }) => {
           </p>
         )}
       </div>
-      <div className="bg-white text-black text-center px-12 border-t-[6px] border-black">
+      <div className="bg-white text-black text-center px-1 border-t-[6px] border-black">
         <p>{getFormattedDate({ date })}</p>
       </div>
     </div>
