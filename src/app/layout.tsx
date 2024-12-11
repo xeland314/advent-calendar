@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 import { Tiny5 } from "next/font/google";
 import "./globals.css";
-import { Header } from "./components";
+import { Footer, Header } from "./components";
 
 const tiny5 = Tiny5({
   variable: "--font-tiny5",
@@ -52,6 +52,9 @@ export default function RootLayout({
           <Header />
         </div>
         {children}
+        <div className="w-full">
+          <Footer />
+        </div>
       </body>
     </html>
   );
