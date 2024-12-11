@@ -1,36 +1,70 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# 🎄 Calendario de Adviento Interactivo
 
-## Getting Started
+## 🌟 Reto de la Semana: 4 al 10 de Diciembre 🎄
 
-First, run the development server:
+### 🎄 Frontend Challenge (React): Calendario de Adviento Interactivo
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
-```
+**Tema:** ¡Crea un calendario de adviento digital para celebrar la cuenta regresiva hacia la Navidad!
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+## Descripción
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+Este proyecto es un calendario de adviento digital desarrollado en Next.js y exportado como una página estática. Cada día, los usuarios pueden abrir una "ventana" que revela un mensaje o regalo virtual. El diseño está inspirado en las festividades, utilizando colores rojos, verdes, dorados y una tipografía festiva. Además, el proyecto tiene un estilo pixelart.
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+## Detalles
 
-## Learn More
+- Muestra un calendario de diciembre con 24 días representados como cajas.
+- Permite que los usuarios abran una nueva caja solo en o después del día correspondiente (usa la fecha del sistema).
+- Cada caja revela un contenido sorpresa (mensaje, imagen o un GIF festivo).
+- Utiliza animaciones suaves al abrir las cajas.
+- Incluye un contador que muestra cuántos días faltan para Navidad.
 
-To learn more about Next.js, take a look at the following resources:
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+## Tecnologías Utilizadas
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+- **Next.js**: Framework de React para la creación de aplicaciones web.
+- **React**: Biblioteca de JavaScript para construir interfaces de usuario.
+- **Tailwind CSS y CSS**: Para el diseño y las animaciones.
+- **Pixelart**: Estilo visual utilizado en el proyecto e imágenes creadas con [Aseprite](https://github.com/aseprite/aseprite).
 
-## Deploy on Vercel
+## Instalación
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+1. Clona el repositorio:
+   ```bash
+   git clone https://github.com/xeland314/advent-calendar.git
+   ```
+2. Navega al directorio del proyecto:
+   ```bash
+   cd advent-calendar
+   ```
+3. Instala las dependencias:
+   ```bash
+   npm install
+   ```
+4. Inicia el servidor de desarrollo:
+   ```bash
+   npm run dev
+   ```
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+## Despliegue
+
+El proyecto está desplegado como una página estática y puede ser visto en el siguiente enlace:
+
+🔗 **Proyecto:** [Calendario de Adviento](https://xeland314.github.io/advent-calendar/)
+
+## Contribuciones
+
+Las contribuciones son bienvenidas. Si deseas contribuir, por favor sigue los siguientes pasos:
+
+1. Haz un fork del proyecto.
+2. Crea una nueva rama (`git checkout -b feature/nueva-funcionalidad`).
+3. Realiza tus cambios y haz commit (`git commit -m 'Añadir nueva funcionalidad'`).
+4. Sube tus cambios (`git push origin feature/nueva-funcionalidad`).
+5. Abre un Pull Request.
+
+## Autor
+
+**Christopher Villamarín** - [GitHub](https://github.com/xeland314)
+
+## Licencia
+
+Este proyecto está bajo la Licencia MIT. Consulta el archivo [LICENSE](LICENSE) para más detalles.
