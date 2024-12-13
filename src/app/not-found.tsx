@@ -5,7 +5,7 @@ import { CoalGift } from "./components";
 
 export default function Custom404() {
   return (
-    <div className="tiny5-regular h-screen flex flex-col items-center justify-center bg-green-500 text-white font-sans">
+    <div className="tiny5-regular h-screen flex flex-col items-center justify-center bg-cyan-100 text-white font-sans">
       <h1 className="text-4xl font-bold mb-4">404 - Page Not Found</h1>
       <CoalGift />
       <Link
