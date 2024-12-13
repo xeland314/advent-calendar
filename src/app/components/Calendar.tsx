@@ -1,14 +1,24 @@
 "use client";
 
 import GiftWithCountdown from "./CountdownGift";
+import { surprises } from "./data/Gifts.2024";
+import DayGift from "./DayGift";
 
 const Calendar: React.FC = () => {
-  const days = Array.from({ length: 25 }, (_, i) => i + 1);
+  const today = new Date();
+  const dates = Array.from(
+    { length: 25 },
+    (_, i) => new Date(today.getFullYear(), 11, i + 1)
+  );
 
   return (
     <div className="w-full grid place-items-center p-4 gap-4 grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-6 border-t-4 border-b-white">
-      {days.map((day) => (
-        <GiftWithCountdown key={day} day={day} />
+      {dates.map((day, index) => (
+        <GiftWithCountdown
+          key={index}
+          date={day}
+          surprise={<DayGift date={day} content={surprises[index]} />}
+        />
       ))}
     </div>
   );

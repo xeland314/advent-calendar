@@ -1,67 +1,47 @@
 "use client";
 
-import { useEffect, useMemo, useState } from "react";
-import { format, isPast } from "date-fns";
-import { es } from "date-fns/locale";
-import DayGift from "./DayGift";
-import { TimeLeftProps, useCountdownTimer } from "../hooks";
+import { ReactNode, useEffect, useState, useCallback } from "react";
+import { isPast } from "date-fns";
+import { useCountdownTimer } from "../hooks";
+import { getFormattedDate, getFormattedTimeLeft } from "../utils";
 
 interface CountdownBoxProps {
-  day: number;
+  date: Date;
+  surprise: ReactNode;
 }
 
-function getFormattedTimeLeft({
-  days,
-  hours,
-  minutes,
-  seconds,
-}: TimeLeftProps): string {
-  if (days === 0) {
-    if (hours === 0) {
-      if (minutes === 0) {
-        return `Disponible en ${seconds}s`;
-      }
-      return `Disponible en ${minutes}min ${seconds}s`;
-    }
-    return `Disponible en ${hours}h ${minutes}min`;
-  }
-  return `Disponible en ${days}d ${hours}h`;
-}
-
-interface DateFormatterProps {
+interface CountdownTimerForGiftProps {
   date: Date;
 }
 
-function getFormattedDate({ date }: DateFormatterProps): string {
-  const formattedDate = format(date, "EEEE, dd MMMM yyyy", { locale: es });
-  const capitalizedDate =
-    formattedDate.charAt(0).toUpperCase() + formattedDate.slice(1);
-  return capitalizedDate;
-}
-
-const CountdownTimerForGift: React.FC<CountdownBoxProps> = ({ day }) => {
-  const today = useMemo(() => new Date(), []);
-  const date = useMemo(
-    () => new Date(today.getFullYear(), 11, day),
-    [today, day]
-  );
-
-  const isAccessible = isPast(date);
-
+const CountdownTimerForGift: React.FC<CountdownTimerForGiftProps> = ({
+  date,
+}) => {
+  const [isAccessible, setIsAccessible] = useState(isPast(date));
   const timeLeft = useCountdownTimer(date);
-
   const [hasBeenOpened, setHasBeenOpened] = useState(false);
 
-  useEffect(() => {
-    if (typeof window !== "undefined") {
-      const saved = localStorage.getItem(
-        `day-${date.toISOString()}-opened`
-      );
-      if (saved) {
-        setHasBeenOpened(true);
-      }
+  const checkAccessibility = useCallback(() => {
+    setIsAccessible(isPast(date));
+  }, [date]);
+
+  const checkOpenedStatus = useCallback(() => {
+    const saved = localStorage.getItem(`day-${date.toISOString()}-opened`);
+    if (saved) {
+      setHasBeenOpened(true);
     }
   }, [date]);
+
+  useEffect(() => {
+    checkOpenedStatus();
+
+    const interval = setInterval(() => {
+      checkAccessibility();
+      checkOpenedStatus();
+    }, 1000);
+
+    return () => clearInterval(interval);
+  }, [date, checkAccessibility, checkOpenedStatus]);
 
   return (
     <div className="mb-8 border-[6px] border-black">
@@ -79,17 +59,20 @@ const CountdownTimerForGift: React.FC<CountdownBoxProps> = ({ day }) => {
         )}
       </div>
       <div className="bg-white text-black text-center px-1 border-t-[6px] border-black">
-        <p>{getFormattedDate({ date })}</p>
+        <p>{getFormattedDate(date)}</p>
       </div>
     </div>
   );
 };
 
-const GiftWithCountdown: React.FC<CountdownBoxProps> = ({ day }) => {
+const GiftWithCountdown: React.FC<CountdownBoxProps> = ({ date, surprise }) => {
   return (
-    <div className="flex flex-col items-center mb-44 mt-4" id={`gift-${day}`}>
-      <CountdownTimerForGift day={day} />
-      <DayGift day={day} />
+    <div
+      className="flex flex-col items-center mb-44 mt-4"
+      id={`gift-${date.toISOString()}`}
+    >
+      <CountdownTimerForGift date={date} />
+      {surprise || null}
     </div>
   );
 };
