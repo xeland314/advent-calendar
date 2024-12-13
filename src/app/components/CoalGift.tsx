@@ -1,6 +1,6 @@
+/* eslint-disable @next/next/no-img-element */
 "use client";
 
-import Image from "next/image";
 import { useEffect, useState } from "react";
 import DayGift from "./DayGift";
 
@@ -18,7 +18,7 @@ const CoalGift: React.FC = () => {
           date={date}
           content={{
             text: "¡Solo has hallado carbón!",
-            image: <Image src="/coal.png" alt="coal" width={64} height={64} />,
+            image: <img src={"/coal.png"} alt="coal" width={80} height={80} />,
           }}
         />
       )}

@@ -51,6 +51,8 @@ const DayGift: React.FC<DayBoxProps> = ({ date, content }) => {
             alt="Caja Fondo"
             className="w-full h-full"
             loading="lazy"
+            width={192}
+            height={192}
           />
           {isOpen && <Gift text={content.text} image={content?.image} />}
         </div>
@@ -65,6 +67,8 @@ const DayGift: React.FC<DayBoxProps> = ({ date, content }) => {
           }}
           transition={{ duration: 0.5 }}
           loading="lazy"
+          width={192}
+          height={192}
         />
       </div>
     </div>

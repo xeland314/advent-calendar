@@ -9,6 +9,8 @@ export default function Footer() {
         alt="tree-in-ball"
         loading="lazy"
         className="self-end"
+        width={64}
+        height={64}
       />
       <div className="w-full p-0 sm:p-4 pb-12 sm:pb-12">
         <p className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl xl:text-6xl font-bold text-center pb-4 bg-clip-text text-transparent animate-gradient">
@@ -29,6 +31,8 @@ export default function Footer() {
         alt="tree-in-ball"
         loading="lazy"
         className="self-end"
+        width={64}
+        height={64}
       />
     </footer>
   );
