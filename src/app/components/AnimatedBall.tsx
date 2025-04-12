@@ -68,7 +68,7 @@ export default function AnimatedBall({ position }: { position: string }) {
         src={"/tree-in-ball.gif"}
         alt="tree-in-ball"
         loading="lazy"
-        className="cursor-pointer self-end"
+        className="cursor-pointer self-end z-10"
         width={64}
         height={64}
         initial={{ x: 0, opacity: 1 }}

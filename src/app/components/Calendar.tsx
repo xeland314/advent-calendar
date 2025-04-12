@@ -12,7 +12,7 @@ const Calendar: React.FC = () => {
   );
 
   return (
-    <div className="w-full grid place-items-center p-4 gap-4 grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-6 border-t-4 border-b-white">
+    <div className="w-full grid place-items-center p-4 gap-4 grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-6">
       {dates.map((day, index) => (
         <GiftWithCountdown
           key={index}
