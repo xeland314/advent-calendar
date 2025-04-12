@@ -1,4 +1,3 @@
-/* eslint-disable @next/next/no-img-element */
 import AnimatedBall from "./AnimatedBall";
 import CountdownTimer from "./CountdownTimer";
 

@@ -53,7 +53,7 @@ const Snowflakes = () => {
     const existingKeys = snowflakes.map((flake) => flake.key as string); // Obtener claves existentes
     const newSnowflakes = createSnowflakes(100, existingKeys);
     setSnowflakes((prev) => [...prev, ...(newSnowflakes as React.JSX.Element[])]); // Agregar sin duplicar
-  }, [pageHeight]);
+  }, [pageHeight, snowflakes]);
 
   return <div className="fixed inset-0 overflow-hidden z-0">{snowflakes}</div>;
 };

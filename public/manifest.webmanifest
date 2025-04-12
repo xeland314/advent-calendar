@@ -1,0 +1,21 @@
+{
+  "name": "Calendario de Adviento",
+  "short_name": "Adviento",
+  "description": "Explora la magia de la Navidad con nuestro Calendario de Adviento interactivo lleno de sorpresas y regalos.",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#FFFFFF",
+  "theme_color": "#FFFFFF",
+  "icons": [
+    {
+      "src": "/tapa.svg",
+      "sizes": "192x192",
+      "type": "image/svg+xml"
+    },
+    {
+      "src": "/tapa.svg",
+      "sizes": "512x512",
+      "type": "image/svg+xml"
+    }
+  ]
+}
