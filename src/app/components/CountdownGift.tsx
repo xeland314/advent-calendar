@@ -1,6 +1,6 @@
 "use client";
 
-import { ReactNode, useEffect, useState, useCallback } from "react";
+import { ReactNode, useState, useEffect } from "react";
 import { isPast } from "date-fns";
 import { useCountdownTimer } from "../hooks";
 import { getFormattedDate, getFormattedTimeLeft } from "../utils";
@@ -14,34 +14,34 @@ interface CountdownTimerForGiftProps {
   date: Date;
 }
 
-const CountdownTimerForGift: React.FC<CountdownTimerForGiftProps> = ({
-  date,
-}) => {
-  const [isAccessible, setIsAccessible] = useState(isPast(date));
+const CountdownTimerForGift: React.FC<CountdownTimerForGiftProps> = ({ date }) => {
+  const [isAccessible, setIsAccessible] = useState(() => isPast(date));
   const timeLeft = useCountdownTimer(date);
-  const [hasBeenOpened, setHasBeenOpened] = useState(false);
-
-  const checkAccessibility = useCallback(() => {
-    setIsAccessible(isPast(date));
-  }, [date]);
-
-  const checkOpenedStatus = useCallback(() => {
-    const saved = localStorage.getItem(`day-${date.toISOString()}-opened`);
-    if (saved) {
-      setHasBeenOpened(true);
+  const [hasBeenOpened, setHasBeenOpened] = useState(() => {
+    if (typeof window !== "undefined") {
+      const saved = localStorage.getItem(`day-${date.toISOString()}-opened`);
+      return !!saved;
     }
-  }, [date]);
+    return false;
+  });
 
   useEffect(() => {
-    checkOpenedStatus();
+    const checkAccessibility = () => setIsAccessible(isPast(date));
+    const checkOpenedStatus = () => {
+      if (typeof window !== "undefined") {
+        const saved = localStorage.getItem(`day-${date.toISOString()}-opened`);
+        setHasBeenOpened(!!saved);
+      }
+    };
 
+    checkOpenedStatus(); // Initial check
     const interval = setInterval(() => {
       checkAccessibility();
       checkOpenedStatus();
     }, 1000);
 
-    return () => clearInterval(interval);
-  }, [date, checkAccessibility, checkOpenedStatus]);
+    return () => clearInterval(interval); // Cleanup the interval
+  }, [date]);
 
   return (
     <div className="mb-8 border-[6px] border-black">

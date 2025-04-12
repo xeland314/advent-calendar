@@ -60,6 +60,7 @@ export const metadata: Metadata = {
     locale: "es_ES",
     type: "website",
   },
+  manifest: "https://xeland314.github.io/advent-calendar/manifest.webmanifest",
 };
 
 export default function RootLayout({

@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef } from "react";
 import {
   differenceInDays,
   differenceInHours,
@@ -11,7 +11,7 @@ export type TimeLeftProps = {
   hours: number | 0;
   minutes: number | 0;
   seconds: number | 0;
-}
+};
 
 const useCountdownTimer = (targetDate: Date) => {
   const [timeLeft, setTimeLeft] = useState<TimeLeftProps>({
@@ -21,20 +21,23 @@ const useCountdownTimer = (targetDate: Date) => {
     seconds: 0,
   });
 
+  // Encapsular targetDate en useRef para evitar ciclos de render innecesarios
+  const dateRef = useRef(targetDate);
+
   useEffect(() => {
     const interval = setInterval(() => {
       const now = new Date();
 
       setTimeLeft({
-        days: differenceInDays(targetDate, now),
-        hours: differenceInHours(targetDate, now) % 24,
-        minutes: differenceInMinutes(targetDate, now) % 60,
-        seconds: differenceInSeconds(targetDate, now) % 60,
+        days: differenceInDays(dateRef.current, now),
+        hours: differenceInHours(dateRef.current, now) % 24,
+        minutes: differenceInMinutes(dateRef.current, now) % 60,
+        seconds: differenceInSeconds(dateRef.current, now) % 60,
       });
     }, 1000);
 
     return () => clearInterval(interval);
-  }, [targetDate]);
+  }, []); // Dependencias vacías, ya que usamos useRef
 
   return timeLeft;
 };
