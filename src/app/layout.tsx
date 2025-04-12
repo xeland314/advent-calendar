@@ -41,7 +41,11 @@ export const metadata: Metadata = {
     title: "Calendario de Adviento",
     description:
       "Celebra la temporada navideña con un calendario lleno de sorpresas. ¡No te pierdas esta tradición interactiva!",
-    images: ["https://xeland314.github.io/advent-calendar/tapa.svg"],
+    images: [
+      "https://xeland314.github.io/images/advent_calendar_preview.png",
+      "https://xeland314.github.io/advent-calendar/tapa.svg",
+      "https://xeland314.github.io/tapa.svg",
+    ],
   },
   openGraph: {
     title: "Calendario de Adviento",
@@ -50,6 +54,18 @@ export const metadata: Metadata = {
     url: "https://xeland314.github.io/advent-calendar/",
     siteName: "Calendario de Adviento",
     images: [
+      {
+        url: "https://xeland314.github.io/images/advent_calendar_preview.png",
+        width: 1200,
+        height: 630,
+        alt: "Vista previa del Calendario de Adviento Interactivo",
+      },
+      {
+        url: "https://xeland314.github.io/tapa.svg",
+        width: 192,
+        height: 192,
+        alt: "Imagen del Calendario de Adviento",
+      },
       {
         url: "https://xeland314.github.io/advent-calendar/tapa.svg",
         width: 192,

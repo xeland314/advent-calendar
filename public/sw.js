@@ -7,7 +7,7 @@ self.addEventListener("push", function (event) {
       badge: data.badge || "/tapa.svg", // Icono pequeño para notificaciones
       vibrate: [100, 50, 100], // Patrón de vibración
       data: {
-        url: data.url || "/", // URL para redirigir cuando se haga clic
+        url: data.url || "/advent-calendar/", // URL para redirigir cuando se haga clic
         dateOfArrival: Date.now(),
         primaryKey: "2",
       },
