@@ -59,24 +59,14 @@ export const metadata: Metadata = {
         width: 1200,
         height: 630,
         alt: "Vista previa del Calendario de Adviento Interactivo",
-      },
-      {
-        url: "https://xeland314.github.io/tapa.svg",
-        width: 192,
-        height: 192,
-        alt: "Imagen del Calendario de Adviento",
-      },
-      {
-        url: "https://xeland314.github.io/advent-calendar/tapa.svg",
-        width: 192,
-        height: 192,
-        alt: "Imagen del Calendario de Adviento",
-      },
+      }
     ],
     locale: "es_ES",
     type: "website",
   },
   manifest: "https://xeland314.github.io/advent-calendar/manifest.webmanifest",
+  robots: "index, follow",
+  metadataBase: new URL("https://xeland314.github.io/advent-calendar/"),
 };
 
 export default function RootLayout({
