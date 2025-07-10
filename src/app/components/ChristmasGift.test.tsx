@@ -1,7 +1,6 @@
 
 import { render, screen, fireEvent, act } from "@testing-library/react";
 import ChristmasGift from "./ChristmasGift";
-import { mockDate, restoreDate } from "@/test-utils/date-mocking";
 import { surprises } from "@/app/data/gifts";
 
 // Mock de next/navigation para useRouter
@@ -113,7 +112,7 @@ describe("ChristmasGift", () => {
     );
     jest.setSystemTime(new Date("2025-12-15T12:00:00.000Z")); // Después de la fecha de apertura
 
-    const { getByAltText } = render(
+    render(
       <ChristmasGift date={giftDate} content={giftContent} />
     );
 

@@ -6,15 +6,14 @@ import { surprises } from "../data/gifts";
 import ChristmasGift from "./ChristmasGift";
 
 const Calendar: React.FC = () => {
-  const today = new Date();
-
   // Memoizar las fechas para garantizar estabilidad
   const dates = useMemo(() => {
+    const today = new Date();
     return Array.from(
       { length: 25 },
       (_, i) => new Date(today.getFullYear(), 11, i + 1)
     );
-  }, [today.getFullYear()]);
+  }, []);
 
   return (
     <div className="w-full grid place-items-center p-4 gap-4 grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-6">

@@ -79,11 +79,7 @@ describe("CoalGiftPage", () => {
       `gift-coal-gift-opened`,
       JSON.stringify(true)
     );
-    render(<CoalGiftPage />);
-
-    // Verificar que la tapa está en la posición de abierto
-    const giftLid = screen.getByAltText("Caja Tapa");
-    
+    render(<CoalGiftPage />);  
 
     // Verificar que el contenido del regalo está visible
     expect(screen.getByText("¡Recibiste carbón por ser impaciente!")).toBeInTheDocument();
