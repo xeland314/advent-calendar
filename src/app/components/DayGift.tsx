@@ -4,8 +4,9 @@
 import React, { useState, useEffect, useCallback } from "react";
 import { motion } from "framer-motion";
 import { isPast } from "date-fns";
-import { useRouter } from "next/navigation"; // Importar useRouter
-import Gift, { GiftContent } from "./Gift";
+import Gift from "./Gift";
+import { GiftContent } from "../data/gifts";
+import { useRouter } from "next/navigation";
 
 interface DayBoxProps {
   date: Date;
@@ -68,7 +69,7 @@ const DayGift: React.FC<DayBoxProps> = ({ date, content }) => {
             width={192}
             height={192}
           />
-          {isOpen && <Gift text={content.text} image={content?.image} />}
+          {isOpen && <Gift text={content.text} image={content.image} />}
         </div>
         <motion.img
           src="/tapa.svg"

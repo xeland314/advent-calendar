@@ -2,7 +2,7 @@
 
 import { useMemo } from "react";
 import GiftWithCountdown from "./CountdownGift";
-import { surprises } from "./data/Gifts.2024";
+import { surprises } from "../data/gifts";
 import DayGift from "./DayGift";
 
 const Calendar: React.FC = () => {

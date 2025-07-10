@@ -17,6 +17,10 @@ function Modal({ isOpen, onClose }: { isOpen: boolean; onClose: () => void }) {
           <button
             onClick={onClose}
             className="px-4 py-2 bg-red-600 text-white rounded hover:bg-red-500"
+            type="button"
+            aria-label="Cerrar modal"
+            title="Cerrar modal"
+            data-testid="close-modal-button"
           >
             Cerrar
           </button>

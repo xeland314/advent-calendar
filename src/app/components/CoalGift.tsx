@@ -18,7 +18,13 @@ const CoalGift: React.FC = () => {
           date={date}
           content={{
             text: "¡Solo has hallado carbón!",
-            image: <img src={"/coal.png"} alt="coal" width={80} height={80} />,
+            image: {
+              src: "/coal.svg",
+              alt: "Carbón",
+              width: 80,
+              height: 80,
+              title: "Carbón para el carbón",
+            },
           }}
         />
       )}
