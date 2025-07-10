@@ -43,6 +43,7 @@ const WrappedGift: React.FC<WrappedGiftProps> = ({
     const saved = localStorage.getItem(`gift-${uniqueId}-opened`);
     if (saved) {
       setHasBeenOpened(true);
+      setIsOpen(true);
     }
   }, [uniqueId]);
 
