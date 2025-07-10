@@ -6,7 +6,7 @@ import { useState } from "react";
 function Modal({ isOpen, onClose }: { isOpen: boolean; onClose: () => void }) {
   return (
     isOpen && (
-      <div className="fixed inset-0 flex items-center justify-center bg-black bg-opacity-75 z-[9999]">
+      <div className="fixed inset-0 flex items-center justify-center bg-black bg-opacity-75 z-9999">
         <div className="bg-white border-8 border-black p-6 text-center">
           <h2 className="text-3xl font-bold mb-4 text-black">
             ¡Rompiste la bola de nieve!
@@ -16,7 +16,7 @@ function Modal({ isOpen, onClose }: { isOpen: boolean; onClose: () => void }) {
           </p>
           <button
             onClick={onClose}
-            className="px-4 py-2 bg-red-600 text-white rounded hover:bg-red-500"
+            className="px-4 py-2 bg-red-600 text-white rounded-sm hover:bg-red-500"
             type="button"
             aria-label="Cerrar modal"
             title="Cerrar modal"

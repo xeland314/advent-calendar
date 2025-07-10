@@ -58,7 +58,7 @@ export default function Custom404() {
       />
       <Link
         href="/"
-        className="mt-4 px-4 py-2 bg-red-600 text-white font-bold rounded"
+        className="mt-4 px-4 py-2 bg-red-600 text-white font-bold rounded-sm"
       >
         Regresar a la página principal
       </Link>
