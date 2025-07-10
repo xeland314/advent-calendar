@@ -1,6 +1,7 @@
 import Link from "next/link";
-import { CoalGift } from "./components";
+import { Gift, WrappedGift } from "./components";
 import { Metadata } from "next";
+import { anytimeOpeningStrategy } from "./strategies/openingStrategies";
 
 export const metadata: Metadata = {
   title: "404 - Página No Encontrada",
@@ -34,13 +35,27 @@ export const metadata: Metadata = {
   },
 };
 
+const coalContent = {
+  text: "¡Recibiste carbón por ser impaciente!",
+  image: {
+    src: "/coal.png",
+    alt: "Un trozo de carbón",
+    width: 80,
+    height: 80,
+  },
+};
+
 export default function Custom404() {
   return (
     <div className="tiny5-regular h-screen flex flex-col items-center justify-center bg-cyan-100 text-white font-sans">
       <h2 className="text-4xl font-bold mb-4 text-black">
         404 - Page Not Found
       </h2>
-      <CoalGift />
+      <WrappedGift
+        openingStrategy={anytimeOpeningStrategy}
+        content={<Gift text={coalContent.text} image={coalContent.image} />}
+        uniqueId="coal-gift" // ID único para el regalo de carbón
+      />
       <Link
         href="/"
         className="mt-4 px-4 py-2 bg-red-600 text-white font-bold rounded"

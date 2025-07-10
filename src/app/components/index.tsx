@@ -1,5 +1,10 @@
 export { default as Header } from "./Header";
 export { default as Calendar } from "./Calendar";
 export { default as Footer } from "./Footer";
-export { default as DayGift } from "./DayGift";
-export { default as CoalGift } from "./CoalGift";
+export { default as WrappedGift } from "./WrappedGift";
+export { default as Gift } from "./Gift";
+export { default as ChristmasGift } from "./ChristmasGift";
+export { default as CountdownTimer } from "./CountdownTimer";
+export { default as CountdownGift } from "./CountdownGift";
+export { default as AnimatedBall } from "./AnimatedBall";
+export { default as Snowflakes } from "./SnowFlake";

@@ -3,7 +3,7 @@
 import { useMemo } from "react";
 import GiftWithCountdown from "./CountdownGift";
 import { surprises } from "../data/gifts";
-import DayGift from "./DayGift";
+import ChristmasGift from "./ChristmasGift";
 
 const Calendar: React.FC = () => {
   const today = new Date();
@@ -22,7 +22,7 @@ const Calendar: React.FC = () => {
         <GiftWithCountdown
           key={index}
           date={day}
-          surprise={<DayGift date={day} content={surprises[index]} />}
+          surprise={<ChristmasGift date={day} content={surprises[index]} />}
         />
       ))}
     </div>

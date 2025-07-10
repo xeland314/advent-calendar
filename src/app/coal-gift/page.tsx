@@ -1,6 +1,8 @@
-import Link from "next/link";
-import { CoalGift } from "../components";
+import WrappedGift from "@/app/components/WrappedGift";
+import Gift from "@/app/components/Gift";
+import { anytimeOpeningStrategy } from "@/app/strategies/openingStrategies";
 import { Metadata } from "next";
+import Link from "next/link";
 
 export const metadata: Metadata = {
   title: "Regalo de Carbón - Calendario de Adviento",
@@ -34,13 +36,27 @@ export const metadata: Metadata = {
   },
 };
 
+const coalContent = {
+  text: "¡Recibiste carbón por ser impaciente!",
+  image: {
+    src: "/coal.png",
+    alt: "Un trozo de carbón",
+    width: 80,
+    height: 80,
+  },
+};
+
 export default function CoalGiftPage() {
   return (
     <div className="tiny5-regular h-screen flex flex-col items-center justify-center bg-cyan-100 text-white font-sans">
       <h2 className="text-4xl font-bold mb-4 text-black">
         ¡Has recibido un regalo!
       </h2>
-      <CoalGift />
+      <WrappedGift
+        openingStrategy={anytimeOpeningStrategy}
+        content={<Gift text={coalContent.text} image={coalContent.image} />}
+        uniqueId="coal-gift" // ID único para el regalo de carbón
+      />
       <Link
         href="/"
         className="mt-4 px-4 py-2 bg-red-700 hover:bg-red-600 text-white font-bold"
