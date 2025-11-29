@@ -1,36 +1,34 @@
-/* eslint-disable @next/next/no-img-element */
 "use client";
 
 import React, { useState, useEffect, useCallback, ReactNode } from "react";
 import { motion } from "framer-motion";
 import { useRouter } from "next/navigation";
 import { AppRouterInstance } from "next/dist/shared/lib/app-router-context.shared-runtime";
+import Image from "next/image";
 
 // --- Tipos de Props ---
 
 interface WrappedGiftProps {
   content: ReactNode;
   openingStrategy: (date?: Date) => boolean;
-  onInvalidOpen?: (
-    params: {
-      clickCount: number;
-      setClickCount: (fn: (prev: number) => number) => void;
-      setIsShaking: (value: boolean) => void;
-      router: AppRouterInstance;
-    }
-  ) => void;
+  onInvalidOpen?: (params: {
+    clickCount: number;
+    setClickCount: (fn: (prev: number) => number) => void;
+    setIsShaking: (value: boolean) => void;
+    router: AppRouterInstance;
+  }) => void;
   date?: Date;
   uniqueId: string; // Para localStorage
 }
 
 // --- Componente ---
 
-const WrappedGift: React.FC<WrappedGiftProps> = ({ 
+const WrappedGift: React.FC<WrappedGiftProps> = ({
   content,
   openingStrategy,
   onInvalidOpen,
   date,
-  uniqueId 
+  uniqueId,
 }) => {
   const [isOpen, setIsOpen] = useState(false);
   const [hasBeenOpened, setHasBeenOpened] = useState(false);
@@ -57,7 +55,16 @@ const WrappedGift: React.FC<WrappedGiftProps> = ({
     } else if (onInvalidOpen) {
       onInvalidOpen({ clickCount, setClickCount, setIsShaking, router });
     }
-  }, [date, isOpen, hasBeenOpened, uniqueId, clickCount, router, openingStrategy, onInvalidOpen]);
+  }, [
+    date,
+    isOpen,
+    hasBeenOpened,
+    uniqueId,
+    clickCount,
+    router,
+    openingStrategy,
+    onInvalidOpen,
+  ]);
 
   const isAccessible = openingStrategy(date);
 
@@ -70,7 +77,7 @@ const WrappedGift: React.FC<WrappedGiftProps> = ({
     >
       <div className="relative w-full h-full">
         <div className="w-full h-full flex items-center justify-center relative">
-          <img
+          <Image
             src="/caja-fondo.svg"
             alt="Caja Fondo"
             className="w-full h-full"
@@ -93,7 +100,9 @@ const WrappedGift: React.FC<WrappedGiftProps> = ({
                   rotateZ: hasBeenOpened ? 15 : 0,
                 }
           }
-          transition={{ duration: 0.5 }}
+          transition={
+            isShaking ? { duration: 0.5, type: "tween" } : { duration: 0.5 }
+          }
           loading="lazy"
           width={192}
           height={192}
