@@ -8,3 +8,4 @@ export { default as CountdownTimer } from "./CountdownTimer";
 export { default as CountdownGift } from "./CountdownGift";
 export { default as AnimatedBall } from "./AnimatedBall";
 export { default as Snowflakes } from "./SnowFlake";
+export { default as ToggleSnowButton } from "./ToggleSnowButton";
