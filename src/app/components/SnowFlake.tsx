@@ -1,70 +1,118 @@
 "use client";
 
-import React, { useEffect, useState } from "react";
-import { motion } from "framer-motion";
+import React, {useState, useEffect} from "react";
 
+interface SnowflakeProps {
+  id: number;
+  size: number;
+  duration: number;
+}
+
+// Genera un número aleatorio de 1 a max (incluido)
+const rand = (max: number) => Math.floor(Math.random() * max) + 1;
+
+/**
+ * Componente de un copo de nieve individual con animación CSS.
+ */
+const Snowflake = React.memo(({ id, size, duration }: SnowflakeProps) => {
+  // Nota: La posición 'left' se randomiza en el render inicial.
+  return (
+    <div
+      key={id}
+      className="absolute text-white/80"
+      style={{
+        left: `${rand(100)}vw`,
+        fontSize: `${size}px`,
+        // La animación comienza inmediatamente al montarse el componente
+        animation: `snowfall ${duration}s linear 0s infinite`,
+        opacity: Math.random() * 0.7 + 0.3,
+        // Agregamos una ligera variación horizontal para simular viento (mejorado)
+        transform: 'translateX(0)',
+        animationTimingFunction: 'cubic-bezier(0.5, 0.05, 0.5, 0.95)',
+      }}
+    >
+      <svg
+            xmlns="http://www.w3.org/2000/svg"
+            width={size}
+            height={size}
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            strokeWidth="2"
+            strokeLinecap="round"
+            strokeLinejoin="round"
+            className="lucide lucide-snowflake-icon lucide-snowflake"
+          >
+            <path d="m10 20-1.25-2.5L6 18" />
+            <path d="M10 4 8.75 6.5 6 6" />
+            <path d="m14 20 1.25-2.5L18 18" />
+            <path d="m14 4 1.25 2.5L18 6" />
+            <path d="m17 21-3-6h-4" />
+            <path d="m17 3-3 6 1.5 3" />
+            <path d="M2 12h6.5L10 9" />
+            <path d="m20 10-1.5 2 1.5 2" />
+            <path d="M22 12h-6.5L14 15" />
+            <path d="m4 10 1.5 2L4 14" />
+            <path d="m7 21 3-6-1.5-3" />
+            <path d="m7 3 3 6h4" />
+          </svg>
+    </div>
+  );
+});
+
+/**
+ * Contenedor de la animación de nieve con generación dinámica y limpieza.
+ */
 const Snowflakes = () => {
-  const [snowflakes, setSnowflakes] = useState<React.JSX.Element[]>([]); // Estado para almacenar los copos generados
-  const [pageHeight, setPageHeight] = useState(0); // Altura dinámica de la página
+  // Estado para almacenar los copos generados
+  const [snowflakes, setSnowflakes] = useState<SnowflakeProps[]>([]);
+  const [isClient, setIsClient] = useState(false);
+  const maxSnowflakes = 100; // Máximo de copos activos
+  const generationInterval = 250; // Generar un nuevo copo cada 250ms
 
-  // Función para crear un solo copo de nieve
-  const createSnowflake = (index: number) => {
-    const uniqueKey = `sf-${index}-${Date.now()}`; // Clave única para cada copo
-    const size = Math.random() * 5 + 3; // Tamaño aleatorio del copo
-    const positionLeft = `${Math.random() * 100}%`; // Posición horizontal aleatoria
-    const opacity = Math.random(); // Opacidad aleatoria
-    const xAnimation = [Math.random() * -400, Math.random() * 400]; // Movimiento horizontal aleatorio
-    const yAnimation = [0, pageHeight]; // Caída vertical según la altura de la página
-    const duration = Math.random() * 5 + 15; // Duración de la animación
-
-    return (
-      <motion.div
-        key={uniqueKey}
-        className="absolute bg-white"
-        style={{
-          width: `${size}px`,
-          height: `${size}px`,
-          top: "0%", // Inicia desde la parte superior
-          left: positionLeft,
-          opacity: opacity,
-        }}
-        animate={{
-          y: yAnimation,
-          x: xAnimation,
-        }}
-        transition={{
-          duration: duration,
-          repeat: Infinity, // Animación infinita
-          ease: "easeInOut",
-        }}
-      />
-    );
-  };
-
+  // Efecto para marcar que el componente se ha montado en el cliente
   useEffect(() => {
-    // Actualizar la altura de la página
-    const handleResize = () => {
-      setPageHeight(document.body.offsetHeight);
-    };
-    handleResize(); // Calcular altura inicial
-    window.addEventListener("resize", handleResize);
+    setIsClient(true);
+  }, []);
 
-    // Intervalo para agregar copos constantemente
-    let index = 0; // Índice para generar claves únicas
+  // Efecto para la generación de nieve (solo se ejecuta en el cliente)
+  useEffect(() => {
+    // Si no estamos en el cliente, no generamos nada.
+    if (!isClient) return;
+
+    let index = 0;
+    // Función para generar y añadir un nuevo copo de nieve
     const snowflakeInterval = setInterval(() => {
-      setSnowflakes((prevSnowflakes) => [
-        ...prevSnowflakes.slice(-200), // Mantener un máximo de 200 copos
-        createSnowflake(index++), // Agregar un nuevo copo
-      ]);
-    }, 200); // Generar un copo nuevo cada 200ms
+      setSnowflakes(prevSnowflakes => {
+        const newFlake = {
+          id: index++,
+          size: rand(20) + 5, 
+          duration: rand(20) + 15,
+          left: rand(100), // Posición horizontal fija
+          opacity: Math.random() * 0.7 + 0.3, // Opacidad fija
+        };
+        
+        // Mantener un máximo de 'maxSnowflakes' copos para controlar el rendimiento
+        return [...prevSnowflakes.slice(-(maxSnowflakes - 1)), newFlake];
+      });
+    }, generationInterval);
 
-    return () => {
-      clearInterval(snowflakeInterval); // Limpiar el intervalo al desmontar
-      window.removeEventListener("resize", handleResize); // Limpiar el evento
-    };
-  }, [pageHeight]);
+    // Función de limpieza: se ejecuta al desmontar el componente (o al salir del efecto)
+    return () => clearInterval(snowflakeInterval);
+  }, [isClient]); // Se ejecuta cuando isClient cambia a true
 
-  return <div className="fixed inset-0 overflow-hidden z-0">{snowflakes}</div>;
+  // Renderizamos solo si estamos en el cliente o si no hay copos aún
+  if (!isClient && snowflakes.length === 0) {
+    return null; // Opcional: no renderizar nada en el servidor para forzar el render solo en el cliente
+  }
+
+  return (
+    <div className="fixed inset-0 pointer-events-none z-10 overflow-hidden">
+      {snowflakes.map((s) => (
+        <Snowflake key={s.id} {...s} />
+      ))}
+    </div>
+  );
 };
 
 export default Snowflakes;
