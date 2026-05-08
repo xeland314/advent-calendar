@@ -18,7 +18,7 @@ const ToggleSnowButton = ({ isSnowing, onClick }: ToggleSnowButtonProps) => {
   return (
     <button
       onClick={onClick}
-      className={`fixed top-4 right-4 z-50 ${baseClasses} ${styleClasses}`}
+      className={`${baseClasses} ${styleClasses}`}
       aria-label={isSnowing ? "Apagar Nieve" : "Encender Nieve"}
     >
       <div className="flex flex-col items-center justify-center text-xs">

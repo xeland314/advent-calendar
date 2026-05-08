@@ -12,9 +12,13 @@ export default function Home() {
 
   return (
     <div className="tiny5-regular w-full flex flex-col items-center justify-center min-h-screen bg-blue-950 text-white font-sans">
-      <ToggleSnowButton isSnowing={isSnowing} onClick={toggleSnow} />
       {isSnowing && <Snowflakes />}
-      <Calendar />
+      <div className="w-full max-w-screen-2xl p-4">
+        <Calendar />
+        <footer className="w-full flex justify-center pt-6">
+          <ToggleSnowButton isSnowing={isSnowing} onClick={toggleSnow} />
+        </footer>
+      </div>
     </div>
   );
 }

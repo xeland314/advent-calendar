@@ -16,13 +16,17 @@ const Calendar: React.FC = () => {
   }, []);
 
   return (
-    <div className="w-full grid place-items-center p-4 gap-4 grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-6">
+    <div className="w-full flex flex-wrap justify-evenly gap-4 p-4">
       {dates.map((day, index) => (
-        <GiftWithCountdown
+        <div
           key={index}
-          date={day}
-          surprise={<ChristmasGift date={day} content={surprises[index]} />}
-        />
+          className="w-full sm:w-[48%] md:w-[31%] lg:w-[23%] xl:w-[15%]"
+        >
+          <GiftWithCountdown
+            date={day}
+            surprise={<ChristmasGift date={day} content={surprises[index]} />}
+          />
+        </div>
       ))}
     </div>
   );
